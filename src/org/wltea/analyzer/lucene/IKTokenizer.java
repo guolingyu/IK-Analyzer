@@ -56,17 +56,18 @@ public final class IKTokenizer extends Tokenizer {
 	private int endPosition;
 	
 	/**
-	 * Lucene 4.0 Tokenizer适配器类构造函数
-	 * @param in
+	 * Lucene 5.0 Tokenizer适配器类构造函数
 	 * @param useSmart
 	 */
-	public IKTokenizer(Reader in , boolean useSmart){
-	    super(in);
-	    offsetAtt = addAttribute(OffsetAttribute.class);
-	    termAtt = addAttribute(CharTermAttribute.class);
-	    typeAtt = addAttribute(TypeAttribute.class);
-		_IKImplement = new IKSegmenter(input , useSmart);
-	}
+        //public IKTokenizer(Reader in , boolean useSmart){
+        public IKTokenizer(boolean useSmart){
+              //屏蔽原有参数Reader in的处理，Lucene会调用setReader来处理此项内容
+              //super(in);
+              offsetAtt = addAttribute(OffsetAttribute.class);
+              termAtt = addAttribute(CharTermAttribute.class);
+              typeAtt = addAttribute(TypeAttribute.class);
+              _IKImplement = new IKSegmenter(input , useSmart);
+        }
 
 	/* (non-Javadoc)
 	 * @see org.apache.lucene.analysis.TokenStream#incrementToken()
